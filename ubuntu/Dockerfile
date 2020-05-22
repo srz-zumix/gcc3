@@ -12,7 +12,7 @@ RUN apt-get update -q -y && \
     apt-get update -q -y && \
     apt-get install -y \
         make wget \
-        build-essential flex gcc-multilib g++-multilib && \
+        build-essential flex gcc-multilib g++-multilib nkf && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
