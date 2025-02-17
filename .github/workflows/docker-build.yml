@@ -14,8 +14,8 @@ permissions:
 jobs:
   docker-build:
     strategy:
+      fail-fast: false
       matrix:
-        fail-fast: false
         from:
           - alpine
           - centos
