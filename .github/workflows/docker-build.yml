@@ -1,0 +1,29 @@
+name: Docker Build
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  docker-build:
+    strategy:
+      matrix:
+        fail-fast: false
+        from:
+          - alpine
+          - centos
+          - h8300
+          - ubuntu
+          - v850
+    uses: ./.github/workflows/reusable-docker-build.yml
+    with:
+      publish: ${{ github.event_name != 'pull_request' }}
+      from: ${{ matrix.from }}
+    secrets: inherit
