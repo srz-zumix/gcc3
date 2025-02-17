@@ -66,7 +66,7 @@ jobs:
         id: create_tagname_with_base_image_tag
         run: |
           echo ${{ steps.create_tagname.outputs.tagname }}
-          OS_TAGNANME_POSTFIX=$(grep -E '^FROM' "${{ inputs.from }}/Dockerfile" | tail -n 1 | awk '{print $2}' | awk -F ':' '{print $2}' | awk -F '-' '{print $1}' > "${GITHUB_OUTPUT}")
+          OS_TAGNANME_POSTFIX=$(grep -E '^FROM' "${{ inputs.from }}/Dockerfile" | tail -n 1 | awk '{print $2}' | awk -F ':' '{print $2}' | awk -F '-' '{print $1}')
           echo "tagname=${OS_TAGNANME_POSTFIX}-${{ steps.create_tagname.outputs.tagname }}" >> "${GITHUB_OUTPUT}"
 
   push_to_registries:
