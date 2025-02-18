@@ -78,7 +78,6 @@ jobs:
     if: "${{ ! contains(needs.prepare.outputs.tagname, '/') }}"
     env:
       TAGNAME: ${{ needs.prepare.outputs.tagname }}
-      REGISTRY: ghcr.io
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
@@ -102,7 +101,8 @@ jobs:
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}        
-      - run: |
+      - name: Metadata Outputs
+        run: |
           echo "${{ toJSON(steps.metadata.outputs) }}"
       - name: Build and Push Docker images
         uses: docker/build-push-action@v6
@@ -112,3 +112,4 @@ jobs:
           push: ${{ inputs.publish }}
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
+          platforms: linux/amd64
