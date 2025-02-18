@@ -19,7 +19,7 @@ RUN apt-get update -q -y && \
 
 RUN wget --no-check-certificate ftp://ftp.gnu.org/gnu/binutils/binutils-${BINUTILS_VERSION}.tar.gz && \
     tar -xzvf binutils-${BINUTILS_VERSION}.tar.gz && \
-    wget --no-check-certificate ftp://sources.redhat.com/pub/newlib/newlib-${NEWLIB_VERSION}.tar.gz && \
+    wget --no-check-certificate ftp://sourceware.org/pub/newlib/newlib-${NEWLIB_VERSION}.tar.gz && \
     tar -xzvf newlib-${NEWLIB_VERSION}.tar.gz && \
     wget --no-check-certificate https://ftp.gnu.org/gnu/gcc/gcc-${GCC_VERSION}/gcc-${GCC_VERSION}.tar.gz && \
     tar -xzvf gcc-${GCC_VERSION}.tar.gz
