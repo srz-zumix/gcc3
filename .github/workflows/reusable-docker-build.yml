@@ -107,8 +107,8 @@ jobs:
       - name: Build and Push Docker images
         uses: docker/build-push-action@v6
         with:
-          context: ./docker
-          file: ./docker/Dockerfile
+          context: ./${{ inputs.from }}
+          file: ./${{ inputs.from }}/Dockerfile
           push: ${{ inputs.publish }}
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
