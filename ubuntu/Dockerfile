@@ -66,23 +66,23 @@ RUN ./configure ${BUILD_TARGET} ${BUILD_HOST} && \
     make && make install
 
 WORKDIR /build/gcc-${GCC_VERSION}/
-# RUN ./configure ${BUILD_TARGET} ${BUILD_HOST} \
-#     --with-newlib \
-#     --disable-nls --disable-threads --disable-werror --disable-bootstrap --enable-languages=c,c++ && \
-#     make && make install
+RUN ./configure ${BUILD_TARGET} ${BUILD_HOST} \
+    --with-newlib \
+    --disable-nls --disable-threads --disable-werror --disable-bootstrap --enable-languages=c,c++ && \
+    make && make install
 
-# WORKDIR /
+WORKDIR /
 
-# ENV  AR=/usr/local/bin/x86_64-linux-ar
-# ENV  AS=/usr/local/bin/x86_64-linux-as
-# ENV  CC=/usr/local/bin/x86_64-linux-gcc
-# ENV CXX=/usr/local/bin/x86_64-linux-g++
-# ENV  LD=/usr/local/bin/x86_64-linux-ld
-# ENV  NM=/usr/local/bin/x86_64-linux-nm
-# ENV ADDR2LINE=/usr/local/bin/x86_64-linux-addr2line
-# ENV   OBJCOPY=/usr/local/bin/x86_64-linux-objcopy
-# ENV   OBJDUMP=/usr/local/bin/x86_64-linux-objdump
-# ENV    RANLIB=/usr/local/bin/x86_64-linux-ranlib
-# ENV      SIZE=/usr/local/bin/x86_64-linux-size
-# ENV   STRINGS=/usr/local/bin/x86_64-linux-strings
-# ENV     STRIP=/usr/local/bin/x86_64-linux-strip
+ENV  AR=/usr/local/bin/x86_64-linux-ar
+ENV  AS=/usr/local/bin/x86_64-linux-as
+ENV  CC=/usr/local/bin/x86_64-linux-gcc
+ENV CXX=/usr/local/bin/x86_64-linux-g++
+ENV  LD=/usr/local/bin/x86_64-linux-ld
+ENV  NM=/usr/local/bin/x86_64-linux-nm
+ENV ADDR2LINE=/usr/local/bin/x86_64-linux-addr2line
+ENV   OBJCOPY=/usr/local/bin/x86_64-linux-objcopy
+ENV   OBJDUMP=/usr/local/bin/x86_64-linux-objdump
+ENV    RANLIB=/usr/local/bin/x86_64-linux-ranlib
+ENV      SIZE=/usr/local/bin/x86_64-linux-size
+ENV   STRINGS=/usr/local/bin/x86_64-linux-strings
+ENV     STRIP=/usr/local/bin/x86_64-linux-strip
