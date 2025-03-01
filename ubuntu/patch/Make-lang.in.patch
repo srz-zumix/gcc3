@@ -1,0 +1,15 @@
+--- ./gcc/cp/Make-lang.in	2025-02-21 03:20:03
++++ ./gcc/cp/Make-lang.in	2025-02-21 03:21:20
+@@ -91,9 +91,9 @@
+ 	      $(CXX_OBJS) $(CXX_C_OBJS) $(BACKEND) libcpp.a $(LIBS)
+ 
+ # Special build rules.
+-$(srcdir)/cp/cfns.h: $(srcdir)/cp/cfns.gperf
+-	gperf -o -C -E -k '1-6,$$' -j1 -D -N 'libc_name_p' -L ANSI-C \
+-		$(srcdir)/cp/cfns.gperf > $(srcdir)/cp/cfns.h
++#$(srcdir)/cp/cfns.h: $(srcdir)/cp/cfns.gperf
++#	gperf -o -C -E -k '1-6,$$' -j1 -D -N 'libc_name_p' -L ANSI-C \
++#		$(srcdir)/cp/cfns.gperf > $(srcdir)/cp/cfns.h
+ 
+ gtype-cp.h gt-cp-call.h gt-cp-decl.h gt-cp-decl2.h : s-gtype; @true
+ gt-cp-pt.h gt-cp-repo.h gt-cp-parser.h gt-cp-method.h : s-gtype; @true
