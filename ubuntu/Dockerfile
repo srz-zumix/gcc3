@@ -30,8 +30,9 @@ ARG BUILD_TARGET=--target=x86_64-linux
 ARG BUILD_HOST=--host=x86_64-linux-gnu
 
 WORKDIR /build/binutils-${BINUTILS_VERSION}
-RUN ./configure ${BUILD_TARGET} ${BUILD_HOST} --disable-shared --disable-nls --disable-werror && \
-    make && make install
+RUN ./configure ${BUILD_TARGET} ${BUILD_HOST} --disable-shared --disable-nls --disable-werror
+RUN make
+RUN make install
 
 # WORKDIR /build/glibc-build
 # RUN ../glibc-2.35/configure ${BUILD_HOST} --disable-sanity-checks
@@ -58,18 +59,21 @@ RUN patch -d /build/gcc-${GCC_VERSION} -p1 -N < /patch/collect2.c.patch && \
 ARG CFLAGS="-w"
 WORKDIR /build/gcc-build/
 RUN ../gcc-${GCC_VERSION}/configure ${BUILD_TARGET} ${BUILD_HOST} --without-headers --with-newlib \
-    --disable-nls --disable-threads --disable-shared --disable-werror --disable-bootstrap --enable-languages=c,c++ && \
-    make all-gcc && make install-gcc
+    --disable-nls --disable-threads --disable-shared --disable-werror --disable-bootstrap --enable-languages=c,c++
+RUN make all-gcc
+RUN make install-gcc
 
 WORKDIR /build/newlib-${NEWLIB_VERSION}/
-RUN ./configure ${BUILD_TARGET} ${BUILD_HOST} && \
-    make && make install
+RUN ./configure ${BUILD_TARGET} ${BUILD_HOST}
+RUN make
+RUN make install
 
 WORKDIR /build/gcc-${GCC_VERSION}/
 RUN ./configure ${BUILD_TARGET} ${BUILD_HOST} \
     --with-newlib \
-    --disable-nls --disable-threads --disable-werror --disable-bootstrap --enable-languages=c,c++ && \
-    make && make install
+    --disable-nls --disable-threads --disable-werror --disable-bootstrap --disable-libssp --enable-languages=c,c++
+RUN make
+RUN install
 
 WORKDIR /
 
