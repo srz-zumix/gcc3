@@ -59,7 +59,7 @@ RUN patch -d /build/gcc-${GCC_VERSION} -p1 -N < /patch/collect2.c.patch && \
 ARG CFLAGS="-w"
 WORKDIR /build/gcc-build/
 RUN ../gcc-${GCC_VERSION}/configure ${BUILD_TARGET} ${BUILD_HOST} --without-headers --with-newlib \
-    --disable-nls --disable-threads --disable-shared --disable-werror --disable-bootstrap --enable-languages=c,c++
+    --disable-nls --disable-threads --disable-shared --disable-werror --disable-bootstrap --enable-languages=c,c++ --disable-multilib
 RUN make all-gcc
 RUN make install-gcc
 
@@ -70,8 +70,9 @@ RUN make install
 
 WORKDIR /build/gcc-${GCC_VERSION}/
 RUN ./configure ${BUILD_TARGET} ${BUILD_HOST} \
-    --with-newlib \
-    --disable-nls --disable-threads --disable-werror --disable-bootstrap --disable-libssp --enable-languages=c,c++
+    --with-newlib --without-system-libunwind \
+    --enable-shared --enable-version-specific-runtime-libs \
+    --disable-nls --disable-threads --disable-werror --disable-bootstrap --enable-ssp --disable-libssp --enable-languages=c,c++
 RUN make
 RUN install
 
