@@ -6,7 +6,7 @@ SHELL ["/bin/bash", "-l", "-o", "pipefail", "-c"]
 RUN yum update -y && \
     yum -y install epel-release && \
     yum install -y make gcc g++ nkf wget perl gettext libffi-devel \
-        compat-gcc-34-3.4.6-4.1.x86_64 compat-gcc-34-c++-3.4.6-4.1.x86_64
+        compat-gcc-34 compat-gcc-34-c++
 
 # RUN yum install -y git && \
 #     git config --global http.sslVersion "tlsv1.2"
