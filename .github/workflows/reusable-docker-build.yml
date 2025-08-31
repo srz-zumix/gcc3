@@ -44,10 +44,11 @@ jobs:
         run: |
           echo "${GITHUB_CONTEXT}"
       - name: Check out the repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ inputs.ref || github.ref }}
           sparse-checkout: ${{ inputs.from }}
+          persist-credentials: false
       - name: Create tagname
         id: create_tagname
         run: |
@@ -80,9 +81,10 @@ jobs:
       TAGNAME: ${{ needs.prepare.outputs.tagname }}
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ inputs.ref || github.ref }}
+          persist-credentials: false
       - uses: docker/metadata-action@v5
         id: metadata
         with:
