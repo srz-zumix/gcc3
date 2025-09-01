@@ -18,10 +18,11 @@ jobs:
       matrix:
         from:
           - alpine
-          - centos
           - h8300
           - ubuntu
           - v850
+          # EOL
+          # - centos
     uses: ./.github/workflows/reusable-docker-build.yml
     with:
       publish: ${{ github.event_name != 'pull_request' }}
