@@ -12,10 +12,16 @@ WORKDIR /build/gcc-${GCC_VERSION}
 RUN sed -i 's/struct siginfo (.*);/siginfo \\1;/g' /build/gcc-${GCC_VERSION}/gcc/config/i386/linux.h && \
     sed -i 's/struct siginfo (.*);/siginfo \\1;/g' /build/gcc-${GCC_VERSION}/gcc/config/i386/linux64.h
 
+RUN wget -O config.guess https://git.savannah.gnu.org/cgit/config.git/plain/config.guess && \
+    wget -O config.sub https://git.savannah.gnu.org/cgit/config.git/plain/config.sub && \
+    find . -name config.guess -exec cp config.guess {} \; && \
+    find . -name config.sub -exec cp config.sub {} \;
+
 RUN ./configure \
     --disable-werror \
     --disable-nls \
     --disable-threads \
     --disable-shared \
-    --enable-languages=c,c++ && \
-    make && make install
+    --enable-languages=c,c++
+RUN make --debug=v
+RUN make install
