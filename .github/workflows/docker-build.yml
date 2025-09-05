@@ -17,11 +17,12 @@ jobs:
       fail-fast: false
       matrix:
         from:
-          - alpine
-          - centos
+          # - alpine
           - h8300
           - ubuntu
           - v850
+          # EOL
+          # - centos
     uses: ./.github/workflows/reusable-docker-build.yml
     with:
       publish: ${{ github.event_name != 'pull_request' }}
